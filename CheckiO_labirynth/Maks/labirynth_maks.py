@@ -1,5 +1,3 @@
-print("Maks labirynt")
 
-'''
-Kod...
-'''
+
+
