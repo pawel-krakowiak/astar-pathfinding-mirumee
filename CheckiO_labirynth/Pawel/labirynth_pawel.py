@@ -1,0 +1,5 @@
+print("Paweł labirynt")
+
+'''
+Kod...
+'''
