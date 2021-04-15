@@ -1,0 +1,61 @@
+from queue import PriorityQueue
+import pygame
+
+# H(n) - Current node to end_node general distance    
+def heuristic(p1, p2):
+    x1, y1 = p1
+    x2, y2 = p2
+    return abs(x1 - x2) + abs(y1 - y2)
+
+def backtrack_path(last_node, current, draw):
+    while current in last_node:
+        current = last_node[current]
+        current.make_path()
+        draw()
+
+def algorithm(draw, grid, start, end):
+    count = 0 # Counting steps 
+    open_set = PriorityQueue() # Always get the smallest element from open_set
+    open_set.put((0, count, start)) # Put start node into open set
+    last_node = {} # Dictionary that explains path step-by-step from backtrack
+    g_value = {spot: float("inf") for row in grid for spot in row} # Keeps track of current shortest distance from start node to this node
+    g_value[start] = 0 # g value of start is always zero
+    f_value = {spot: float("inf") for row in grid for spot in row} # Keeps track of predicted distance from end to this node
+    f_value[start] = heuristic(start.get_pos(), end.get_pos()) # heuristic distance
+
+    open_set_hash = {start}
+
+    while not open_set.empty():
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+
+        current = open_set.get()[2]
+        open_set_hash.remove(current)
+
+        if current == end:
+            backtrack_path(last_node, end, draw)
+            end.make_end()
+            return True # We found the path
+        
+        for near in current.near_nodes:
+            temp_g_value = g_value[current] + 1
+
+            if temp_g_value < g_value[near]:
+                last_node[near] = current
+                g_value[near] = temp_g_value
+                f_value[near] = temp_g_value + heuristic(near.get_pos(), end.get_pos())
+                if near not in open_set_hash:
+                    count += 1
+                    open_set.put((f_value[near], count, near))
+                    open_set_hash.add(near)
+                    near.make_open()
+        
+        draw()
+
+        if current != start:
+            current.make_closed()
+    
+    return False
+
+
