@@ -53,7 +53,6 @@ def main(win, width):
             # Algorithm start
             if event.type == pygame.KEYDOWN:
                 if event.key == start_key and start and end:
-                    print("ALGORITHM STARTED")
                     for row in grid:
                         for spot in row:
                             spot.update_near_nodes(grid)
