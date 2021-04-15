@@ -1,5 +1,5 @@
-from rgbcolors_const import Colors
 import pygame
+from rgbcolors_const import Colors
 
 class Node:
     '''
@@ -8,8 +8,8 @@ class Node:
     def __init__(self, row, col, width, total_rows):
         self.row = row
         self.col = col
-        self.x = row * width
-        self.y = col * width
+        self.x_cord = row * width
+        self.y_cord = col * width
         self.color = Colors.WHITE # Blank node color
         self.near_nodes = [] # Possitions of all neighbor nodes near tracked object
         self.width = width
@@ -38,13 +38,13 @@ class Node:
     # Change node status
     def make_closed(self):
         self.color = Colors.LIGHT_GREY
-    
+
     def make_open(self):
         self.color = Colors.GREEN
 
     def make_bush(self):
         self.color = Colors.MIRUMEE_BLUE
-    
+
     def make_start(self):
         self.color = Colors.DARK_BLUE
 
@@ -60,13 +60,13 @@ class Node:
 
     # Node drawing
     def draw(self, win):
-        pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
+        pygame.draw.rect(win, self.color, (self.x_cord, self.y_cord, self.width, self.width))
 
 
     # Check possible node neighbors that's not a wall
     def update_near_nodes(self, grid):
         self.near_nodes = []
-        
+
         if self.col > 0 and not grid[self.row][self.col - 1].is_bush():
             left_node = grid[self.row][self.col - 1]
             self.near_nodes.append(left_node)
@@ -78,7 +78,7 @@ class Node:
         if self.row > 0 and not grid[self.row - 1][self.col].is_bush():
             upper_node = grid[self.row - 1][self.col]
             self.near_nodes.append(upper_node)
-        
+
         if self.row < self.total_rows - 1 and not grid[self.row + 1][self.col].is_bush():
             lower_node = grid[self.row + 1][self.col]
             self.near_nodes.append(lower_node)

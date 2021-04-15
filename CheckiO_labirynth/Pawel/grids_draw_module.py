@@ -1,6 +1,6 @@
+import pygame
 from rgbcolors_const import Colors
 from node_module import Node
-import pygame
 
 # Generating grid on whole window
 def make_grid(rows, width):
@@ -34,11 +34,11 @@ def draw(win, grid, rows, width):
     pygame.display.update()
 
 # Detecting mouse clicked possition
-def getMouse_clicked_pos(pos, rows, width):
+def get_mouse_clicked_pos(pos, rows, width):
     grid_gap = width // rows
-    y, x = pos
+    cord1, cord2 = pos
 
-    row = y // grid_gap
-    col = x // grid_gap
+    row = cord1 // grid_gap
+    col = cord2 // grid_gap
 
     return row, col

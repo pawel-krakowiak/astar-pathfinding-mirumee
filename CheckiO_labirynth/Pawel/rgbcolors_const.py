@@ -1,7 +1,7 @@
 class Colors:
     MIRUMEE_BLUE = (44, 143, 162) # Bushes color
     DARK_BLUE = (0, 0, 139)  # Start (player) color
-    
+
     WHITE = (255, 255, 255) # Blank node
     BLACK = (0, 0, 0)
     RED = (255, 0, 0)
