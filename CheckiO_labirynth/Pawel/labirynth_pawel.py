@@ -1,5 +1,0 @@
-print("Paweł labirynt")
-
-'''
-Kod...
-'''
