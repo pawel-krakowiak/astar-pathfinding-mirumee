@@ -1,19 +1,62 @@
+"""
+Module contains A* pathfinding algorithm which based on heuristics is used to find the shortest
+path from the starting point to the end point.
+Comparative data in the algorithm:
+H(n) - Distance from the currently analyzed node to the end node.
+G(n) - The current shortest distance from the starting point to the current square.
+F(n) = G(n) + H(n)
+The F(n) function prioritizes the lowest result as the answear of the most optimal path.
+"""
+
 from queue import PriorityQueue
 import pygame
 
 def heuristic(st_pos, end_pos):
-    # H(n) - Current node to end_node general distance
+    """Represent a distance from current node position to start node.
+
+    Args:
+        st_pos (list) : row, colum coordinates of start node.
+        end_pos (list) : row, column coordinates of end node.
+
+    Return:
+        (int) : The absolute value of distanse from current node to end point
+    """
     st_st, end_st = st_pos
     st_sec, end_sec = end_pos
+    print(abs(st_st - st_sec) + abs(end_st - end_sec))
     return abs(st_st - st_sec) + abs(end_st - end_sec)
 
 def backtrack_path(last_node, current, draw):
+    """Backtrack after result, creating and displays final path.
+
+    Args:
+        last_node (set) : Position of the previous node from which the
+        algorithm passed to the current one.
+        current (set) : Position of the current node.
+        draw (function) : Changing color of current node.
+    """
     while current in last_node:
         current = last_node[current]
         current.make_path()
         draw()
 
 def algorithm(draw, grid, start, end):
+    """A* pathfinding algorithm that finds the shortest path from start point to end point.
+
+    Args:
+        draw (function) : Changing color of current analized node.
+        grid (Node.object) : Current grid.
+        start (set) : Start point position.
+        end (set) : End point position.
+
+    Return:
+        False when the algorithm finishes its work,
+        regardless of whether it has found and created a path.
+
+    Notes:
+        For more informations about A* algorithm visit:
+        https://en.wikipedia.org/wiki/A*_search_algorithm
+    """
     count = 0 # Counting steps
     open_set = PriorityQueue() # Always get the smallest element from open_set
     open_set.put((0, count, start)) # Put start node into open set
