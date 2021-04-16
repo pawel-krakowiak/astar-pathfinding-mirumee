@@ -23,7 +23,6 @@ def heuristic(st_pos, end_pos):
     """
     st_st, end_st = st_pos
     st_sec, end_sec = end_pos
-    print(abs(st_st - st_sec) + abs(end_st - end_sec))
     return abs(st_st - st_sec) + abs(end_st - end_sec)
 
 def backtrack_path(last_node, current, draw):
