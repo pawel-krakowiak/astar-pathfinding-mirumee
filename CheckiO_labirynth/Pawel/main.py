@@ -55,12 +55,12 @@ def main(win, width=800):
                     start = spot
                     start.make_start()
 
-               
+
                 elif not end and spot != start:
                     end = spot
                     end.make_end()
 
-                
+
                 elif spot != end and spot != start:
                     spot.make_bush()
 
