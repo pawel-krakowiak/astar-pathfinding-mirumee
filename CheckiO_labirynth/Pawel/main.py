@@ -49,17 +49,18 @@ def main(win, width=800):
                 pos = pygame.mouse.get_pos()
                 row, col = get_mouse_clicked_pos(pos, rows, width)
                 spot = grid[row][col]
-                # Always dreate start first if not exists...
+
+                # Defines what type of node to create
                 if not start and spot != end:
                     start = spot
                     start.make_start()
 
-                # ...otherwise make end
+               
                 elif not end and spot != start:
                     end = spot
                     end.make_end()
 
-                # If start and end exists make a bush
+                
                 elif spot != end and spot != start:
                     spot.make_bush()
 

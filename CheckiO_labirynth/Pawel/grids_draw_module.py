@@ -7,7 +7,6 @@ import pygame
 from rgbcolors_const import Colors
 from node_module import Node
 
-# Generating grid on whole window
 def make_grid(rows, width):
     """Creating list range of nodes determines how much rows will be in program
         Args:
@@ -27,7 +26,6 @@ def make_grid(rows, width):
 
     return grid
 
-# Display gird and make outlines for every grid
 def draw_grid(win, rows, width):
     """Displays grids on board
 
@@ -42,7 +40,6 @@ def draw_grid(win, rows, width):
         for j in range(rows):
             pygame.draw.line(win, Colors.GREY, (j * grid_gap, 0), (j * grid_gap, width))
 
-# Draw all elements
 def draw(win, grid, rows, width):
     """Displays blank nodes on board
 
@@ -61,7 +58,6 @@ def draw(win, grid, rows, width):
     draw_grid(win, rows, width)
     pygame.display.update()
 
-# Detecting mouse clicked possition
 def get_mouse_clicked_pos(pos, rows, width):
     """Returns coordinates of clicked mouse possition
 
