@@ -1,3 +1,17 @@
+"""
+Program for visualization of the A * pathfinding algorithm based on heuretics.
+The algorithm guarantees finding the shortest path from the START to END point,
+taking into account the walls blocking the algorithm's movement.
+Based on the implementation of the Open Labyrinth CheckIO task.
+https://py.checkio.org/en/mission/open-labyrinth/
+
+Default keys:
+LMB : Set the start / Set end / Create a bush (wall).
+RMB : Clear node.
+SPACEBAR : Run the algorithm.
+C : Reset
+"""
+
 import pygame
 from astar_algorithm import algorithm
 from grids_draw_module import make_grid, draw, get_mouse_clicked_pos
@@ -6,7 +20,18 @@ WIDTH = 800
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 pygame.display.set_caption("CheckIO Open Labyrinth A* Pathfinding Solution (Visualization)")
 
-def main(win, width):
+def main(win, width=800):
+    """Main loop function applies window settings, hooks key events and controls other modules.
+
+    Args:
+        win : pygame.Surface class
+            Initialized window for display.
+        width : int
+            Window size (default = 800).
+
+    Notes:
+        Used module algorithm and grids_draw_module.
+    """
     start_key = pygame.K_SPACE
     rows = 50
 

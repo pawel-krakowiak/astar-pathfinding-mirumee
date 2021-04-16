@@ -1,3 +1,8 @@
+"""
+Grids draw module is responsible for creating and displaying grids on the board
+and detecting the clicked node, taking into account its coordinates.
+The module is based on the pygame library.
+"""
 import pygame
 from rgbcolors_const import Colors
 from node_module import Node
