@@ -9,6 +9,14 @@ from node_module import Node
 
 # Generating grid on whole window
 def make_grid(rows, width):
+    """Creating list range of nodes determines how much rows will be in program
+        Args:
+            rows (int) : Determine the size of square board.
+            width (int) : Window size (default = 800).
+
+        Return:
+            grid (list) : Node objects
+    """
     grid = []
     gap = width // rows
     for row in range(rows):
@@ -16,11 +24,19 @@ def make_grid(rows, width):
         for col in range(rows):
             node = Node(row, col, gap, rows)
             grid[row].append(node)
+    print("GRID: ", grid)
 
     return grid
 
 # Display gird and make outlines for every grid
 def draw_grid(win, rows, width):
+    """Displays grids on board
+
+        Args:
+            win (pygame.Surface class) : Initialized window for display.
+            rows (int) : Determine the size of square board.
+            width (int) : Window size (default = 800).
+    """
     grid_gap = width // rows
     for i in range(rows):
         pygame.draw.line(win, Colors.GREY, (0, i * grid_gap), (width, i * grid_gap))
@@ -29,6 +45,14 @@ def draw_grid(win, rows, width):
 
 # Draw all elements
 def draw(win, grid, rows, width):
+    """Displays blank nodes on board
+
+    Args:
+        win (pygame.Surface class) : Initialized window for display.
+        grid (list) : Node objects
+        rows (int) : Determine the size of square board.
+        width (int) : Window size (default = 800).
+    """
     win.fill(Colors.WHITE)
 
     for row in grid:
@@ -40,6 +64,17 @@ def draw(win, grid, rows, width):
 
 # Detecting mouse clicked possition
 def get_mouse_clicked_pos(pos, rows, width):
+    """Returns coordinates of clicked mouse possition
+
+    Args:
+        pos (list) : pygame x, y possition
+        rows (int) : Determine the size of square board.
+        width (int) : Window size (default = 800).
+
+    Return:
+        row (int) : row possition of clicked node.
+        col (int) : column possition of clocked node.
+    """
     grid_gap = width // rows
     cord1, cord2 = pos
 

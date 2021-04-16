@@ -24,10 +24,8 @@ def main(win, width=800):
     """Main loop function applies window settings, hooks key events and controls other modules.
 
     Args:
-        win : pygame.Surface class
-            Initialized window for display.
-        width : int
-            Window size (default = 800).
+        win (pygame.Surface class) : Initialized window for display.
+        width (int) : Window size (default = 800).
 
     Notes:
         Used module algorithm and grids_draw_module.
