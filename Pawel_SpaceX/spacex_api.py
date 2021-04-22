@@ -1,4 +1,3 @@
-import csv
 import requests
 import json
 
@@ -27,13 +26,21 @@ class RecordsAPI():
         
     @classmethod
     def get_results(cls):
-        result = requests.get(RecordsAPI.API_KEY)
+        result = requests.get(cls.BASE_URL)
         result = result.json()
         return result
 
     @classmethod
-    def show_api(cls):
+    def get_flights_range(cls, show_max=False):
+        url = cls.BASE_URL+"latest"
+        json_data = requests.get(url).json()
+        print(f"Last flight number: {json_data['flight_number']}") if show_max else None
+        return json_data["flight_number"]
+
+    @staticmethod
+    def show_api():
         print(json.dumps(RecordsAPI.get_results(), sort_keys=True, indent=4))
+
 
 
 class Flight(RecordsAPI):
@@ -69,6 +76,10 @@ class Flight(RecordsAPI):
             Video Link: \t {self.video_link}\n
             """)
 
-new_flight = Flight.create_by_flight_id("77")
-new_flight.show_info()
 
+
+
+# new_flight = Flight.create_by_flight_id("69")
+# new_flight.show_info()
+# RecordsAPI.get_flights_range()
+# RecordsAPI.show_api()
