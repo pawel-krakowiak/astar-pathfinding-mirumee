@@ -58,7 +58,7 @@ class Flight(RecordsAPI):
     def create_by_flight_id(cls, flight_number):
         url = cls.BASE_URL + flight_number
         json_data = requests.get(url).json()
-        flight = RecordsAPI.get_from_api(flight_number)
+        flight = super().get_from_api(flight_number)
         return Flight(flight_number,
             json_data["mission_name"],
             json_data["rocket"]["rocket_id"], 
