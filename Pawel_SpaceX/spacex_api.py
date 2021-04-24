@@ -1,5 +1,9 @@
 import requests
 import json
+import logging
+
+format = "%(asctime)s: %(message)s"
+logging.basicConfig(format=format, level=logging.INFO, datefmt="%H:%M:%S")
 
 class RecordsAPI():
     BASE_URL = r"https://api.spacexdata.com/v3/launches/"
@@ -22,7 +26,7 @@ class RecordsAPI():
             rocket_id = json_data.get("rocket"),
             rocket_name = json_data.get("rocket"),
             launch_date_utc = json_data.get("launch_date_utc"),
-            video_link = "video_link")
+            video_link = json_data.get("links"))
         
     @classmethod
     def get_results(cls):
@@ -32,14 +36,15 @@ class RecordsAPI():
 
     @classmethod
     def get_flights_range(cls, show_max=False):
+        logging.info("")
         url = cls.BASE_URL+"latest"
         json_data = requests.get(url).json()
-        print(f"Last flight number: {json_data['flight_number']}") if show_max else None
+        logging.info("Last API flight number: %s.", json_data['flight_number']) if show_max else None
         return json_data["flight_number"]
 
     @staticmethod
     def show_api():
-        print(json.dumps(RecordsAPI.get_results(), sort_keys=True, indent=4))
+        logging.info(json.dumps(RecordsAPI.get_results(), sort_keys=True, indent=4))
 
 
 
@@ -79,7 +84,7 @@ class Flight(RecordsAPI):
 
 
 
-# new_flight = Flight.create_by_flight_id("69")
+# new_flight = Flight.create_by_flight_id("312")
 # new_flight.show_info()
 # RecordsAPI.get_flights_range()
 # RecordsAPI.show_api()
